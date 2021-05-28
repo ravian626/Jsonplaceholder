@@ -1,0 +1,378 @@
+{
+	"info": {
+		"_postman_id": "1f51f038-b425-4c4e-a953-9120d420796f",
+		"name": "Jsonplaceholder",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "POSTS",
+			"item": [
+				{
+					"name": "Listing All Resouces",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://jsonplaceholder.typicode.com/posts",
+							"protocol": "https",
+							"host": [
+								"jsonplaceholder",
+								"typicode",
+								"com"
+							],
+							"path": [
+								"posts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Creating A Resource",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"userId\": 1,\r\n        \"id\": 1,\r\n        \"title\": \"Creat Resource\",\r\n        \"body\": \"I have created this new post using POST method\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://jsonplaceholder.typicode.com/posts",
+							"protocol": "https",
+							"host": [
+								"jsonplaceholder",
+								"typicode",
+								"com"
+							],
+							"path": [
+								"posts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Updating A Resouce",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"userId\": 1,\r\n        \"id\": 101,\r\n        \"title\": \"Updating A Resouce\",\r\n        \"body\": \"I have updated this new post using PUT method\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://jsonplaceholder.typicode.com/posts/1",
+							"protocol": "https",
+							"host": [
+								"jsonplaceholder",
+								"typicode",
+								"com"
+							],
+							"path": [
+								"posts",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Patching A Resource",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"title\": \"Patching A Resouce\",\r\n\"body\": \"I have patched this new post using PATCH method\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://jsonplaceholder.typicode.com/posts/1",
+							"protocol": "https",
+							"host": [
+								"jsonplaceholder",
+								"typicode",
+								"com"
+							],
+							"path": [
+								"posts",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Getting All Users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://jsonplaceholder.typicode.com/users",
+							"protocol": "https",
+							"host": [
+								"jsonplaceholder",
+								"typicode",
+								"com"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Creating A User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+									"});\r",
+									"\r",
+									"const response = pm.response.json();\r",
+									"pm.test(\"User \"+response.name+ \" should be created\", function () {\r",
+									"    pm.expect(response.name).to.eql(\"Abdul Waheed\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The City of the newly created user is = \" +response.address.city, function () {\r",
+									"        pm.expect(response.address.city).to.eql(\"Lahore\");\r",
+									"});\r",
+									"pm.globals.set(\"id\", response.id);\r",
+									"pm.test(\"Global Variable  \" + pm.globals.get(\"id\") + \"  has been set successfully\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"id\": 1,\r\n        \"name\": \"Abdul Waheed\",\r\n        \"username\": \"awaheed\",\r\n        \"email\": \"awaheed@gmail.com\",\r\n        \"address\": {\r\n            \"street\": \"Main Boulevard Gulberg\",\r\n            \"suite\": \"13th Floor\",\r\n            \"city\": \"Lahore\",\r\n            \"zipcode\": \"39250\",\r\n            \"geo\": {\r\n                \"lat\": \"-37.3159\",\r\n                \"lng\": \"81.1496\"\r\n            }\r\n        },\r\n        \"phone\": \"+92387845313\",\r\n        \"website\": \"hildegard.org\",\r\n        \"company\": {\r\n            \"name\": \"Romaguera-Crona\",\r\n            \"catchPhrase\": \"Multi-layered client-server neural-net\",\r\n            \"bs\": \"harness real-time e-markets\"\r\n        }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://jsonplaceholder.typicode.com/users",
+							"protocol": "https",
+							"host": [
+								"jsonplaceholder",
+								"typicode",
+								"com"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Updating A User",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"name\": \"Abdul Waheed\",\r\n    \"username\": \"awaheed\",\r\n    \"email\": \"awaheed@gmail.com\",\r\n    \"address\": {\r\n        \"street\": \"Main Boulevard Gulberg\",\r\n        \"suite\": \"13th Floor\",\r\n        \"city\": \"Lahore\",\r\n        \"zipcode\": \"39250\",\r\n        \"geo\": {\r\n            \"lat\": \"-37.3159\",\r\n            \"lng\": \"81.1496\"\r\n        }\r\n    },\r\n    \"phone\": \"+92387845313\",\r\n    \"website\": \"hildegard.org\",\r\n    \"company\": {\r\n        \"name\": \"Public Health\",\r\n        \"catchPhrase\": \"Multi-layered client-server neural-net\",\r\n        \"bs\": \"harness real-time e-markets\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://jsonplaceholder.typicode.com/users/1",
+							"protocol": "https",
+							"host": [
+								"jsonplaceholder",
+								"typicode",
+								"com"
+							],
+							"path": [
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Patching A User",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"company\": {\r\n        \"name\": \"Romaguera-Crona\",\r\n        \"catchPhrase\": \"Health above all\",\r\n        \"bs\": \"Live healthy life\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://jsonplaceholder.typicode.com/users/1",
+							"protocol": "https",
+							"host": [
+								"jsonplaceholder",
+								"typicode",
+								"com"
+							],
+							"path": [
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "TODOs",
+			"item": [
+				{
+					"name": "Getting All TODOs",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://jsonplaceholder.typicode.com/todos",
+							"protocol": "https",
+							"host": [
+								"jsonplaceholder",
+								"typicode",
+								"com"
+							],
+							"path": [
+								"todos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Creating A TODO",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+									"});\r",
+									"\r",
+									"const response = pm.response.json();\r",
+									"pm.test(\"TODO list should be created with \"+pm.globals.get(\"TODOid\") , function () {\r",
+									"   // pm.expect(response.id).to.eql(pm.globals.get(\"TODOid\"));\r",
+									"    pm.expect(response.title).to.eql(\"Variables\");\r",
+									"    pm.expect(response.completed).to.eql(true);\r",
+									"});\r",
+									"pm.test(\"The TODO is created agaist the User Id =\" + response.userId, function () {\r",
+									"        pm.expect(response.userId).to.eql(pm.globals.get(\"id\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The Global variable \" + pm.globals.get(\"id\")+ \" has been deleted successfully\");\r",
+									"pm.globals.unset(\"id\");\r",
+									"\r",
+									"pm.test(\"The Global variable \" + pm.globals.get(\"TODOid\")+ \" has been deleted successfully\");\r",
+									"pm.globals.unset(\"TODOid\");\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.globals.set(\"TODOid\",\" TODO ID \" +parseInt(Math.random()* 100));\r",
+									"\r",
+									"\r",
+									"\r",
+									"/*OR you can simply write it as below using the JAVA script\r",
+									"const TODOid = \" TODO ID \" +parseInt(Math.random()* 100);\r",
+									"pm.globals.set(\"TODOid\",TODOid);\r",
+									"*/\r",
+									"\r",
+									"\r",
+									"\r",
+									"/*OR you can define your own function\r",
+									"pm.globals.set(\"TODOid\",getTODOid());\r",
+									"function getTODOid(){\r",
+									"    const TODOid = \" TODO ID \" +parseInt(Math.random()* 100);\r",
+									"    console.log(TODOid);\r",
+									"    return TODOid;\r",
+									"}\r",
+									"*/"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n        \"userId\": 11,\r\n        \"id\": 1,\r\n        \"title\": \"Variables\",\r\n        \"completed\": true\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://jsonplaceholder.typicode.com/todos?id={{id}}",
+							"protocol": "https",
+							"host": [
+								"jsonplaceholder",
+								"typicode",
+								"com"
+							],
+							"path": [
+								"todos"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "{{id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
